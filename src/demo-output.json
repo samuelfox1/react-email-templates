@@ -1,0 +1,4 @@
+{
+    "html": "<h1><span style=\"color: rgb(136, 136, 136);\">Email Templating Tool</span></h1><p><br></p><p>Welcome!</p><p>This tool is built for clients of the <a href=\"https://www.tutor-me.io\" rel=\"noopener noreferrer\" target=\"_blank\">tutor-me.io</a> app.</p><p>It allows a tutor to build email templates for various student interactions.</p><p><br></p><p><span style=\"background-color: rgb(235, 214, 255);\">have fun!</span> 🤓</p>",
+    "text": "Email Templating Tool\n\n\n\n\nWelcome!\n\nThis tool is built for clients of the tutor-me.io app.\n\nIt allows a tutor to build email templates for various student interactions.\n\n\n\n\nhave fun! 🤓"
+}
