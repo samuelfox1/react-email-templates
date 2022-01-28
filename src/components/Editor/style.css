@@ -1,0 +1,20 @@
+
+#editor {
+    margin: 0 2em 0 2em;
+    min-height: 80vh;
+    color: #000;
+}
+
+.ql-toolbar {
+  background-color: #ffffff;
+  /* min-height: 5vh; */
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.ql-editor {
+  background-color: #ffffff;
+  min-height: 70vh;
+}
