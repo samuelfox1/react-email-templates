@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
-import data from './data.json'
+import { EditorContext } from '../Provider';
 import './style.css'
 
 const modules = {
@@ -25,20 +25,14 @@ const formats = [
 ]
 
 const Editor = () => {
-    const [state, setState] = useState({ text: data.html })
+    const { editorState: { text }, handleChange } = useContext(EditorContext)
 
-    const handleChange = (value) => {
-        const html = document.querySelector('.ql-editor').innerHTML
-        const text = document.querySelector('.ql-editor').innerText
-        console.log({ html, text })
-        setState({ text: value })
-    }
     return (
         <div id="editor">
             <ReactQuill
                 modules={modules}
                 formats={formats}
-                value={state.text}
+                value={text}
                 onChange={handleChange}
             />
         </div>

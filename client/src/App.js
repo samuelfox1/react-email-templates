@@ -3,6 +3,7 @@ import './App.js'
 
 import Editor from './components/Editor';
 import Header from './components/Header';
+import EditorProvider from './components/Provider/index.js';
 
 const App = () => {
 
@@ -10,10 +11,12 @@ const App = () => {
   const [state, setState] = useState()
 
   return (
-    <div className="App">
+    <>
       <Header />
-      <Editor />
-    </div >
+      <EditorProvider>
+        <Editor />
+      </EditorProvider>
+    </>
   )
 }
 export default App;
