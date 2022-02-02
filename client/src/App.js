@@ -4,7 +4,7 @@ import Editor from './components/Editor';
 import EmailTemplatesHelp from './components/EmailTemplatesHelp';
 import ToggleHelpButton from './components/EmailTemplatesHelp/ToggleHelpButton';
 import Header from './components/Header';
-import EditorProvider from './components/Provider/index.js';
+import EditorProvider from './components/Provider/';
 import SaveButton from './components/SaveButton';
 
 const App = () => {
