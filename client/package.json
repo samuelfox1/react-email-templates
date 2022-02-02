@@ -2,7 +2,6 @@
   "name": "react-email-templates",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://samuelfox1.github.io/react-email-templates",
   "proxy": "http://localhost:3003/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
@@ -16,8 +15,6 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -b gh-pages -d build",
     "start": "PORT=3002 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

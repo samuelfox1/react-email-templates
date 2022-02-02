@@ -16,7 +16,7 @@ const BackButton = () => {
             onClick={handleClick}
         >
             <Icon>
-                <i class="fas fa-chevron-left mr-2"></i>
+                <i className="fas fa-chevron-left mr-2"></i>
             </Icon>
             {getDomain(whereIcameFrom)}
         </Button>
