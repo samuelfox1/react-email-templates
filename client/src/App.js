@@ -1,4 +1,5 @@
 import React from 'react';
+import BackButton from './components/BackButton';
 
 import Editor from './components/Editor';
 import EmailTemplatesHelp from './components/EmailTemplatesHelp';
@@ -11,6 +12,7 @@ const App = () => {
 
   return (
     <>
+      <BackButton />
       <Header />
       <EditorProvider>
         <div className='p-5 mt-5 has-text-left'>
