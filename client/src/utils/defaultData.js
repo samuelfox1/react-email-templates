@@ -7,19 +7,19 @@ export const defaultTemplateData =
 {
     template: {
         body: {
-            html: 'template.body.html',
-            text: 'template.body.text'
+            html: null,
+            text: null,
         },
         includePropertiesFor: {
-            tutor: 'includePropertiesFor.tutor',
-            student: 'includePropertiesFor.student',
-            meeting: 'includePropertiesFor.meeting'
+            tutor: null,
+            student: null,
+            meeting: null,
         },
-        _id: '_id',
-        name: "name",
-        subject: "subject",
-        createdAt: "createdAt",
+        _id: null,
+        name: null,
+        subject: null,
+        createdAt: null,
     },
-    saveTemplateTo: "save_template_to",
-    returnUserTo: 'returnUserTo',
+    saveTemplateTo: null,
+    returnUserTo: null,
 }

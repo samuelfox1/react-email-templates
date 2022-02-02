@@ -4,7 +4,7 @@ import { defaultQueryParams, defaultTemplateData } from "../../utils/defaultData
 import { testString } from "../../utils/temp";
 import data from './data.json'
 
-const loadTemplate = false
+const loadTemplate = true
 
 export const EditorContext = createContext();
 
@@ -53,6 +53,7 @@ const EditorProvider = ({ children }) => {
         let mounted = true
         const getTemplateFromEndpointParam = async ({ endpoint, token }) => {
             try {
+                console.log(endpoint)
                 const response = await getEmailTemplate(endpoint, token)
                 if (mounted && response) {
                     setTemplateData((curr) => ({ ...curr, ...response }))
@@ -85,7 +86,9 @@ const EditorProvider = ({ children }) => {
             bodyEditorState,
             handleBodyChange,
             subjectEditorState,
-            handleSubjectChange
+            handleSubjectChange,
+            templateData,
+            queryParams,
         }}>
             {children}
         </EditorContext.Provider>

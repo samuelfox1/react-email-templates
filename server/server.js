@@ -29,12 +29,36 @@ app.post('/', async (req, res) => {
         // request data from provided endpont
         const { data } = await axios({
             method: 'GET',
-            url: `http://${endpoint}`,
+            url: endpoint,
             headers: {
                 'Content-Type': 'application/json',
                 authorization: `Bearer: ${token}`,
             }
         })
+        return res.json(data)
+    } catch ({ message }) {
+        console.error(message)
+        return res.status(500).json(message)
+    }
+})
+
+app.post('/save', async (req, res) => {
+    try {
+        const endpoint = req.body.endpoint
+        if (!endpoint) return res.status(400).json({ message: 'missing endpoint' })
+        const token = req.body.token
+        if (!token) return res.status(400).json({ message: 'missing token' })
+        // request data from provided endpont
+        const { data } = await axios({
+            method: 'PUT',
+            url: endpoint,
+            headers: {
+                'Content-Type': 'application/json',
+                authorization: `Bearer: ${token}`,
+            },
+            data: req.body
+        })
+
         return res.json(data)
     } catch ({ message }) {
         console.error(message)
