@@ -1,8 +1,9 @@
-const express = require('express');
-const cors = require('cors');
 const { default: axios } = require('axios');
+const cors = require('cors');
+const express = require('express');
+const path = require('path')
 
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3003;
 const app = express();
 
 app.use(cors());
@@ -17,25 +18,28 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
-app.post('/', (req, res) => {
-    const { body: { endpoint, user } } = req
-    // request data from source server, respond to client with data
-    axios({
-        method: 'GET',
-        url: `http://${endpoint}`,
-        headers: {
-            'Content-Type': 'application/json',
-            authorization: `Bearer: ${user}`,
-        }
-    })
-        .then(({ data }) => {
-            console.log(data)
-            res.json(data)
+// listening for incoming request from out client
+app.post('/', async (req, res) => {
+    try {
+        // console.log(req.body)
+        const endpoint = req.body.endpoint
+        if (!endpoint) return res.status(400).json({ message: 'missing endpoint' })
+        const token = req.body.token
+        if (!token) return res.status(400).json({ message: 'missing token' })
+        // request data from provided endpont
+        const { data } = await axios({
+            method: 'GET',
+            url: `http://${endpoint}`,
+            headers: {
+                'Content-Type': 'application/json',
+                authorization: `Bearer: ${token}`,
+            }
         })
-        .catch(({ message }) => {
-            console.error(message)
-            res.status(500).json(message)
-        })
+        return res.json(data)
+    } catch ({ message }) {
+        console.error(message)
+        return res.status(500).json(message)
+    }
 })
 
 app.listen(PORT, () => {

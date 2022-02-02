@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Form } from 'react-bulma-components'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import { EditorContext } from '../Provider';
@@ -25,17 +26,33 @@ const formats = [
 ]
 
 const Editor = () => {
-    const { editorState: { text }, handleChange } = useContext(EditorContext)
+    const {
+        bodyEditorState: { text: bodyText },
+        handleBodyChange,
+        subjectEditorState: { text: subjectText },
+        handleSubjectChange
+    } = useContext(EditorContext)
 
     return (
-        <div id="editor">
-            <ReactQuill
-                modules={modules}
-                formats={formats}
-                value={text}
-                onChange={handleChange}
-            />
-        </div>
+        <>
+            <Form.Field>
+                <Form.Label textColor='white'>Subject</Form.Label>
+                <Form.Control >
+                    <Form.Input id='subject' value={subjectText} onChange={handleSubjectChange} />
+                </Form.Control>
+                <Form.Label textColor='white' >Body</Form.Label>
+                <Form.Control>
+                    <div id="editor">
+                        <ReactQuill
+                            modules={modules}
+                            formats={formats}
+                            value={bodyText}
+                            onChange={handleBodyChange}
+                        />
+                    </div>
+                </Form.Control>
+            </Form.Field>
+        </>
     );
 }
 
