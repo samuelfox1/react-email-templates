@@ -7,7 +7,8 @@ const SaveButton = () => {
     const {
         queryParams: { token },
         templateData,
-        subjectEditorState: { text: subject }
+        subjectState: subject,
+        titleState: name,
     } = useContext(EditorContext)
 
     const handleDisableButton = () => {
@@ -29,7 +30,8 @@ const SaveButton = () => {
         const template = {
             ...templateData.template,
             body: { html, text },
-            subject
+            subject,
+            name
         }
         console.log(2, template)
         try {

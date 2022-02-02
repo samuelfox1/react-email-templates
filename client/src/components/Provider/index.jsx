@@ -1,10 +1,11 @@
 import React, { createContext, useEffect, useState } from "react";
 import { getEmailTemplate } from "../../utils/API";
 import { defaultQueryParams, defaultTemplateData } from "../../utils/defaultData";
-import { testString } from "../../utils/temp";
-import data from './data.json'
+import demo from './data.json'
+const { template: { body, subject, name } } = demo
 
-const loadTemplate = true
+const FETCH_TEMPLATE = true
+console.log('FETCH_TEMPLATE =', FETCH_TEMPLATE)
 
 export const EditorContext = createContext();
 
@@ -22,19 +23,29 @@ const getSearchParams = (search) => (
 );
 
 const EditorProvider = ({ children }) => {
-    const [bodyEditorState, setBodyEditorState] = useState({ text: testString || data.html })
-    const [subjectEditorState, setSubjectEditorState] = useState({ text: testString || data.html })
+    const [bodyState, setBodyState] = useState({ text: body.html })
+    const [subjectState, setSubjectState] = useState(subject)
+    const [titleState, setTitleState] = useState(name)
     const [queryParams, setQueryParams] = useState(defaultQueryParams)
     const [templateData, setTemplateData] = useState(defaultTemplateData)
     const [viewHelp, setViewHelp] = useState(false)
 
     useEffect(() => {
-        const html = templateData?.template?.body?.html
-        const text = templateData?.template?.body?.text
-        const subject = templateData?.template.subject
-        if (html) setBodyEditorState({ text: html })
-        else if (text) setBodyEditorState({ text })
-        if (subject) setSubjectEditorState({ text: subject })
+        if (templateData.template) {
+            const {
+                template: {
+                    body: {
+                        html, text
+                    },
+                    subject,
+                    name
+                }
+            } = templateData
+            if (html) setBodyState({ text: html })
+            else if (text) setBodyState({ text })
+            if (subject) setSubjectState(subject)
+            if (name) setTitleState(name)
+        }
     }, [templateData])
 
     useEffect(() => {
@@ -61,32 +72,24 @@ const EditorProvider = ({ children }) => {
             } catch (error) { console.log(error) }
         }
 
-        if (loadTemplate && queryParams.endpoint && queryParams.token) getTemplateFromEndpointParam(queryParams)
+        if (FETCH_TEMPLATE && queryParams.endpoint && queryParams.token) getTemplateFromEndpointParam(queryParams)
 
         return () => mounted = false;
     }, [queryParams])
 
-    const handleBodyChange = (value) => {
-        // const html = document.querySelector('.ql-editor').innerHTML
-        // const text = document.querySelector('.ql-editor').innerText
-        setBodyEditorState({ text: value })
-    }
-    const handleSubjectChange = ({ target: { value } }) => {
 
-        // const html = document.querySelector('.ql-editor').innerHTML
-        // const text = document.querySelector('.ql-editor').innerText
-        setSubjectEditorState({ text: value })
-    }
 
 
     return (
         <EditorContext.Provider value={{
             viewHelp,
             setViewHelp,
-            bodyEditorState,
-            handleBodyChange,
-            subjectEditorState,
-            handleSubjectChange,
+            bodyState,
+            setBodyState,
+            subjectState,
+            setSubjectState,
+            titleState,
+            setTitleState,
             templateData,
             queryParams,
         }}>
