@@ -1,20 +1,24 @@
-import React, { useState } from 'react';
-import './App.js'
+import React from 'react';
 
 import Editor from './components/Editor';
+import EmailTemplatesHelp from './components/EmailTemplatesHelp';
+import ToggleHelpButton from './components/EmailTemplatesHelp/ToggleHelpButton';
 import Header from './components/Header';
 import EditorProvider from './components/Provider/index.js';
+import SaveButton from './components/SaveButton';
 
 const App = () => {
-
-  // eslint-disable-next-line no-unused-vars
-  const [state, setState] = useState()
 
   return (
     <>
       <Header />
       <EditorProvider>
-        <Editor />
+        <div className='p-5 mt-5 has-text-left'>
+          <ToggleHelpButton />
+          <EmailTemplatesHelp />
+          <Editor />
+          <SaveButton />
+        </div>
       </EditorProvider>
     </>
   )
