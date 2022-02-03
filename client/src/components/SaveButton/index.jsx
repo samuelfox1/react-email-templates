@@ -37,7 +37,8 @@ const SaveButton = () => {
         try {
             const result = await setEmailTemplate(endpoint, token, template)
             console.log(result)
-            window.location.href = document.referrer
+            // window.location.href = document.referrer
+            console.log('success')
         } catch (error) {
             console.error(error)
         }
