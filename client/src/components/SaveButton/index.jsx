@@ -12,7 +12,6 @@ const SaveButton = () => {
     } = useContext(EditorContext)
 
     const handleDisableButton = () => {
-        console.log()
         if (!(templateData?.template?._id)) return true
         return false
     }
@@ -20,12 +19,10 @@ const SaveButton = () => {
     const handleClick = async () => {
         const endpoint = templateData.saveTemplateTo
         if (!endpoint || !token) return
-        console.log(0)
 
         const html = document.querySelector('.ql-editor').innerHTML
         const text = document.querySelector('.ql-editor').innerText
         if (!html || !text || !subject) return
-        console.log(1)
 
         const template = {
             ...templateData.template,
@@ -33,12 +30,9 @@ const SaveButton = () => {
             subject,
             name
         }
-        console.log(2, template)
         try {
-            const result = await setEmailTemplate(endpoint, token, template)
-            console.log(result)
-            // window.location.href = document.referrer
-            console.log('success')
+            await setEmailTemplate(endpoint, token, template)
+            window.location.href = document.referrer
         } catch (error) {
             console.error(error)
         }
