@@ -21,11 +21,11 @@ app.get('*', (req, res) => {
 // listening for incoming request from out client
 app.post('/', async (req, res) => {
     try {
-        // console.log(req.body)
         const endpoint = req.body.endpoint
         if (!endpoint) return res.status(400).json({ message: 'missing endpoint' })
         const token = req.body.token
         if (!token) return res.status(400).json({ message: 'missing token' })
+
         // request data from provided endpont
         const { data } = await axios({
             method: 'GET',
@@ -42,12 +42,13 @@ app.post('/', async (req, res) => {
     }
 })
 
-app.post('/save', async (req, res) => {
+app.post('/save', async ({
+    body: { endpoint, token, template }
+}, res) => {
     try {
-        const endpoint = req.body.endpoint
         if (!endpoint) return res.status(400).json({ message: 'missing endpoint' })
-        const token = req.body.token
         if (!token) return res.status(400).json({ message: 'missing token' })
+
         // request data from provided endpont
         const { data } = await axios({
             method: 'PUT',
@@ -56,7 +57,7 @@ app.post('/save', async (req, res) => {
                 'Content-Type': 'application/json',
                 authorization: `Bearer: ${token}`,
             },
-            data: req.body
+            data: template
         })
 
         return res.json(data)
