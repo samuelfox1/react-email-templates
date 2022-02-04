@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container } from 'react-bulma-components';
 import BackButton from './components/BackButton';
 
 import Editor from './components/Editor';
@@ -15,12 +16,12 @@ const App = () => {
       <BackButton />
       <Header />
       <EditorProvider>
-        <div className='p-5 mt-5 has-text-left'>
+        <Container className='p-5 mt-5 has-text-left'>
           <ToggleHelpButton />
           <EmailTemplatesHelp />
           <Editor />
           <SaveButton />
-        </div>
+        </Container>
       </EditorProvider>
     </>
   )
